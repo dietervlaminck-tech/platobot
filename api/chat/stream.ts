@@ -2,10 +2,6 @@ import type { VercelRequest, VercelResponse } from "@vercel/node";
 import Anthropic from "@anthropic-ai/sdk";
 import { SYSTEM_PROMPT } from "./system-prompt";
 
-const anthropic = new Anthropic({
-  apiKey: process.env.ANTHROPIC_API_KEY,
-});
-
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method !== "POST") {
     return res.status(405).json({ error: "Method not allowed" });
@@ -15,6 +11,10 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     if (!process.env.ANTHROPIC_API_KEY) {
       return res.status(500).json({ error: "ANTHROPIC_API_KEY is not configured. Add it in Vercel Environment Variables." });
     }
+
+    const anthropic = new Anthropic({
+      apiKey: process.env.ANTHROPIC_API_KEY,
+    });
 
     const { message, messages: history } = req.body;
 
