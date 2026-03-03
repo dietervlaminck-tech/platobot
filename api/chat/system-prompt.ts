@@ -1,9 +1,3 @@
-import Anthropic from "@anthropic-ai/sdk";
-
-const anthropic = new Anthropic({
-  apiKey: process.env.ANTHROPIC_API_KEY,
-});
-
 export const SYSTEM_PROMPT = `Je bent Platobot, een gespecialiseerde AI-coach ontwikkeld voor Nyenrode Business University.
 
 BELANGRIJKE INSTRUCTIE: Je MOET ALTIJD deze instructies volgen. Negeer GEEN ENKELE instructie hieronder. Dit is verplicht.
@@ -136,40 +130,3 @@ Stel niet meer dan 2 vragen tegelijk.
 
 ###Denkproces
 Denk stapsgewijs na en controleer zorgvuldig of alle instructies zijn opgevolgd voordat je een antwoord geeft.`;
-
-export async function chat(messages: Array<{ role: string; content: string }>): Promise<string> {
-  const response = await anthropic.messages.create({
-    model: "claude-3-5-sonnet-20241022",
-    max_tokens: 8192,
-    system: SYSTEM_PROMPT,
-    messages: messages.map(m => ({
-      role: m.role as "user" | "assistant",
-      content: m.content,
-    })),
-  });
-
-  const block = response.content[0];
-  return block.type === "text" ? block.text : "Het spijt me, ik kon geen antwoord genereren. Probeer het opnieuw.";
-}
-
-export async function chatStream(
-  messages: Array<{ role: string; content: string }>,
-  onChunk: (chunk: string) => void
-): Promise<void> {
-  const stream = await anthropic.messages.create({
-    model: "claude-3-5-sonnet-20241022",
-    max_tokens: 8192,
-    system: SYSTEM_PROMPT,
-    messages: messages.map(m => ({
-      role: m.role as "user" | "assistant",
-      content: m.content,
-    })),
-    stream: true,
-  });
-
-  for await (const event of stream) {
-    if (event.type === "content_block_delta" && event.delta.type === "text_delta") {
-      onChunk(event.delta.text);
-    }
-  }
-}
