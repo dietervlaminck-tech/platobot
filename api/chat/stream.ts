@@ -12,6 +12,10 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   }
 
   try {
+    if (!process.env.ANTHROPIC_API_KEY) {
+      return res.status(500).json({ error: "ANTHROPIC_API_KEY is not configured. Add it in Vercel Environment Variables." });
+    }
+
     const { message, messages: history } = req.body;
 
     if (!message || typeof message !== "string") {
