@@ -1,4 +1,4 @@
-import platoCastle from "@assets/image_1762937046529.png";
+// Background image removed — asset not in repo
 
 export default function HeroSection() {
   const scrollToChat = () => {
@@ -37,12 +37,12 @@ export default function HeroSection() {
           </div>
           
           <div className="flex items-center justify-center">
-            <img 
-              src={platoCastle} 
-              alt="Plato en Socrates bij Nyenrode kasteel" 
-              className="w-full max-w-lg rounded-lg shadow-lg"
+            <div
+              className="w-full max-w-lg rounded-lg bg-muted shadow-lg aspect-video flex items-center justify-center"
               data-testid="img-hero"
-            />
+            >
+              <p className="text-muted-foreground">Platobot</p>
+            </div>
           </div>
         </div>
       </div>
