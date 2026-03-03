@@ -44,7 +44,11 @@ export default function ChatInterface() {
         signal: abortControllerRef.current.signal,
       });
 
-      if (!response.ok) throw new Error("Failed to send message");
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => null);
+        const errorMsg = errorData?.error || `Server error: ${response.status}`;
+        throw new Error(errorMsg);
+      }
 
       const reader = response.body?.getReader();
       const decoder = new TextDecoder();
@@ -82,9 +86,9 @@ export default function ChatInterface() {
     } catch (error: any) {
       if (error.name !== "AbortError") {
         console.error("Chat error:", error);
-        setMessages(prev => [...prev, { 
-          role: "assistant", 
-          content: "Er is een fout opgetreden. Probeer het opnieuw." 
+        setMessages(prev => [...prev, {
+          role: "assistant",
+          content: `Er is een fout opgetreden: ${error.message}`
         }]);
       }
     } finally {
