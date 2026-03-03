@@ -2,7 +2,6 @@ import { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Send, Loader2 } from "lucide-react";
-import platoImage from "@assets/image_1762937046529.png";
 
 interface Message {
   role: "user" | "assistant";
@@ -12,7 +11,6 @@ interface Message {
 export default function ChatInterface() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
-  const [conversationId, setConversationId] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [streamingMessage, setStreamingMessage] = useState("");
   const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -42,7 +40,7 @@ export default function ChatInterface() {
       const response = await fetch("/api/chat/stream", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message: userMessage, conversationId }),
+        body: JSON.stringify({ message: userMessage, messages }),
         signal: abortControllerRef.current.signal,
       });
 
@@ -51,7 +49,6 @@ export default function ChatInterface() {
       const reader = response.body?.getReader();
       const decoder = new TextDecoder();
       let accumulatedMessage = "";
-      let receivedConversationId: string | null = null;
 
       if (reader) {
         while (true) {
@@ -68,12 +65,6 @@ export default function ChatInterface() {
 
               try {
                 const parsed = JSON.parse(data);
-                if (parsed.conversationId && !receivedConversationId) {
-                  receivedConversationId = parsed.conversationId;
-                  if (!conversationId) {
-                    setConversationId(parsed.conversationId);
-                  }
-                }
                 if (parsed.content) {
                   accumulatedMessage += parsed.content;
                   setStreamingMessage(accumulatedMessage);
@@ -110,21 +101,7 @@ export default function ChatInterface() {
   };
 
   return (
-    <div 
-      className="relative flex h-full w-full flex-col"
-      style={{
-        backgroundImage: `url(${platoImage})`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        backgroundRepeat: "no-repeat",
-      }}
-    >
-      <div 
-        className="absolute inset-0 bg-background"
-        style={{ opacity: 0.85 }}
-      />
-      
-      <div className="relative z-10 flex h-full flex-col">
+    <div className="flex h-full w-full flex-col bg-background">
         <header className="border-b bg-background/80 backdrop-blur-sm px-4 py-3 sm:px-6">
           <div className="mx-auto max-w-4xl">
             <h1 className="text-xl font-bold text-foreground sm:text-2xl" data-testid="text-app-title">
@@ -215,7 +192,6 @@ export default function ChatInterface() {
             </p>
           </div>
         </div>
-      </div>
     </div>
   );
 }
