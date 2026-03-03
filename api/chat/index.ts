@@ -1,6 +1,6 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
 import Anthropic from "@anthropic-ai/sdk";
-import { SYSTEM_PROMPT } from "./system-prompt";
+import { SYSTEM_PROMPT } from "../../shared/system-prompt";
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method !== "POST") {
