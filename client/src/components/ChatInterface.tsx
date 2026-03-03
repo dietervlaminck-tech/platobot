@@ -142,10 +142,7 @@ export default function ChatInterface() {
               <div className="flex h-full min-h-[300px] items-center justify-center">
                 <div className="text-center">
                   <p className="text-lg font-medium text-foreground sm:text-xl">
-                    Welkom bij Platobot
-                  </p>
-                  <p className="mt-2 text-sm text-muted-foreground sm:text-base">
-                    Begin het gesprek door je persoonlijke leerdoelen te delen
+                    Vraag me wat je wilt
                   </p>
                 </div>
               </div>
