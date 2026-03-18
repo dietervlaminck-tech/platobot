@@ -8,7 +8,7 @@ export default function Footer() {
           </div>
           
           <p className="text-sm text-primary-foreground/80" data-testid="text-footer-description">
-            Ontwikkeld voor Nyenrode Business University
+            Groepsoefening: Data Analytics & Business AI
           </p>
           
           <p className="text-xs text-primary-foreground/60" data-testid="text-copyright">

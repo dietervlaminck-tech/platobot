@@ -14,24 +14,24 @@ export default function HeroSection() {
         <div className="grid gap-8 lg:grid-cols-2 lg:gap-12">
           <div className="flex flex-col justify-center">
             <h1 className="mb-4 text-4xl font-bold text-foreground" data-testid="text-hero-title">
-              Ontwikkel je leiderschapsvaardigheden
+              Ontdek de menselijke rol in AI
             </h1>
             <p className="mb-6 text-lg text-muted-foreground" data-testid="text-hero-subtitle">
-              Platobot is je persoonlijke AI-coach voor professionele ontwikkeling. 
-              Werk aan zelfreflectie, samenwerking, ethisch handelen, presentatievaardigheden en besluitvorming.
+              Platobot is jullie Socratische gesprekspartner over AI en data analytics.
+              Ga in gesprek, denk kritisch na, en ontdek hoe menselijke keuzes AI vormgeven.
             </p>
             <div className="flex flex-col gap-3">
               <div className="flex items-start gap-2">
                 <span className="mt-1 h-2 w-2 rounded-full bg-accent"></span>
-                <p className="text-base text-foreground">STARR-methode en Korthagen model voor zelfreflectie</p>
+                <p className="text-base text-foreground">Is generatieve AI inductief of deductief?</p>
               </div>
               <div className="flex items-start gap-2">
                 <span className="mt-1 h-2 w-2 rounded-full bg-accent"></span>
-                <p className="text-base text-foreground">Socratische dialoog voor ethisch handelen</p>
+                <p className="text-base text-foreground">Wat is de waarde van menselijk oordeelsvermogen?</p>
               </div>
               <div className="flex items-start gap-2">
                 <span className="mt-1 h-2 w-2 rounded-full bg-accent"></span>
-                <p className="text-base text-foreground">Retorische driehoek voor presentatievaardigheden</p>
+                <p className="text-base text-foreground">Hoe kan AI helpen in bedrijfsprocessen?</p>
               </div>
             </div>
           </div>
