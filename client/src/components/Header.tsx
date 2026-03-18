@@ -7,7 +7,7 @@ export default function Header() {
             Platobot
           </div>
           <div className="hidden text-sm text-primary-foreground/80 md:block" data-testid="text-tagline">
-            Nyenrode Leiderschapscoach
+            Data Analytics & Business AI
           </div>
         </div>
       </div>

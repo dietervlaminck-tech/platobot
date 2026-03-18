@@ -112,7 +112,7 @@ export default function ChatInterface() {
               Platobot
             </h1>
             <p className="text-sm text-muted-foreground" data-testid="text-app-subtitle">
-              Je persoonlijke leiderschapscoach
+              Groepsoefening: Data Analytics & Business AI
             </p>
           </div>
         </header>
@@ -123,7 +123,7 @@ export default function ChatInterface() {
               <div className="flex h-full min-h-[300px] items-center justify-center">
                 <div className="text-center">
                   <p className="text-lg font-medium text-foreground sm:text-xl">
-                    Welkom, ik ben Platobot: waar kan ik je mee helpen?
+                    Welkom! Start het gesprek met jullie groep en Platobot over AI en data analytics.
                   </p>
                 </div>
               </div>
